@@ -3,7 +3,7 @@
 import { motion, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
-const fadeInUp = {
+const fadeUp = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
