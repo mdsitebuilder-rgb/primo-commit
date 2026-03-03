@@ -1,23 +1,23 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import Link from "next/link";
 
-const fadeInUp = {
+const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 24 },
-  visible: (delay = 0) => ({
+  visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: "easeOut", delay },
-  }),
+    transition: { duration: 0.6 },
+  },
 };
 
-const sectionVariant = {
+const sectionVariant: Variants = {
   hidden: { opacity: 0, y: 32 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: "easeOut" },
+    transition: { duration: 0.7 },
   },
 };
 
@@ -38,7 +38,7 @@ export default function HomePage() {
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="relative overflow-hidden rounded-3xl border border-slate-800/80 bg-gradient-to-br from-slate-900/90 via-slate-950/95 to-slate-950/90 px-6 py-10 shadow-[0_25px_80px_rgba(15,23,42,0.9)] md:px-10 md:py-14 lg:px-14 lg:py-18"
           >
             {/* Animated gradient blob */}
@@ -46,13 +46,13 @@ export default function HomePage() {
               aria-hidden="true"
               initial={{ opacity: 0, scale: 0.7 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.2, ease: "easeOut" }}
+              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
               className="pointer-events-none absolute -right-24 top-[-20%] h-80 w-80 rounded-full bg-gradient-to-br from-sky-500 via-cyan-400 to-indigo-500 opacity-40 blur-3xl"
             />
             <motion.div
               aria-hidden="true"
               animate={{ x: [0, 20, 0], y: [0, -12, 0] }}
-              transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+              transition={{ duration: 14, repeat: Infinity, ease: [0.16, 1, 0.3, 1] }}
               className="pointer-events-none absolute right-8 top-10 h-36 w-36 rounded-2xl border border-sky-400/30 bg-slate-900/60 backdrop-blur-xl"
             >
               <div className="flex h-full flex-col justify-between p-4 text-xs text-slate-200">
@@ -152,7 +152,7 @@ export default function HomePage() {
                 className="relative mt-2 flex justify-center md:justify-end"
                 initial={{ opacity: 0, x: 24 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
+                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
               >
                 <div className="relative h-60 w-full max-w-sm overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-950/80 shadow-[0_20px_60px_rgba(15,23,42,0.9)] backdrop-blur-xl">
                   <div className="absolute inset-x-4 top-4 flex items-center justify-between text-[0.7rem] text-slate-300">
@@ -165,7 +165,7 @@ export default function HomePage() {
                   <motion.div
                     aria-hidden="true"
                     animate={{ y: [12, -8, 12] }}
-                    transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+                    transition={{ duration: 12, repeat: Infinity, ease: [0.16, 1, 0.3, 1] }}
                     className="absolute inset-x-8 top-16 h-2 rounded-full bg-gradient-to-r from-sky-400 via-cyan-300 to-indigo-400"
                   />
                   <div className="absolute inset-x-6 bottom-6 space-y-2 text-[0.7rem] text-slate-200">
@@ -324,7 +324,7 @@ export default function HomePage() {
                 viewport={{ once: true, amount: 0.4 }}
                 transition={{
                   duration: 0.45,
-                  ease: "easeOut",
+                  ease: [0.16, 1, 0.3, 1],
                   delay: 0.05 * idx,
                 }}
                 className="group flex flex-col justify-between rounded-2xl border border-slate-800/80 bg-slate-950/60 p-5 shadow-[0_18px_50px_rgba(15,23,42,0.75)] backdrop-blur-xl transition-colors hover:border-sky-500/50"
@@ -383,7 +383,7 @@ export default function HomePage() {
                 initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 0.4, ease: "easeOut", delay: 0.05 * idx }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1], delay: 0.05 * idx }}
                 className="rounded-2xl border border-slate-800/80 bg-slate-950/60 px-4 py-4 text-center shadow-[0_18px_50px_rgba(15,23,42,0.75)] backdrop-blur-xl"
               >
                 <p className="text-xs font-medium uppercase tracking-[0.18em] text-slate-400">

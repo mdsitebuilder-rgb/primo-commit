@@ -1,22 +1,22 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, Variants } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
-const fadeUp = {
+const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: "easeOut" as const }
-  }
-}
+    transition: { duration: 0.6 },
+  },
+};
 
 function Section({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
   return (
-    <motion.div ref={ref} variants={fadeUp} initial="hidden" animate={inView ? "visible" : "hidden"} className={className}>
+    <motion.div ref={ref} variants={fadeInUp} initial="hidden" animate={inView ? "visible" : "hidden"} className={className}>
       {children}
     </motion.div>
   );
@@ -63,7 +63,7 @@ function CountUpStat({
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.5 }}
-      transition={{ duration: 0.5, ease: "easeOut", delay: 0.06 * index }}
+      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.06 * index }}
       className="rounded-2xl border border-slate-800/80 bg-slate-950/70 px-4 py-4 text-left shadow-[0_18px_60px_rgba(15,23,42,0.9)] backdrop-blur-xl sm:px-4 sm:py-5"
     >
       <div className="text-xs font-medium uppercase tracking-[0.2em] text-slate-500">
