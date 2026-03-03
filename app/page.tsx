@@ -504,33 +504,184 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CONTATTI */}
-      <section id="contatti" className="py-24 px-4 border-t border-slate-800">
-        <Section className="max-w-3xl mx-auto text-center p-12 rounded-3xl bg-gradient-to-br from-sky-500/20 to-indigo-500/20 border border-sky-500/20">
-          <h2 className="text-4xl font-bold mb-4">Hai un progetto in mente?</h2>
-          <p className="text-slate-400 text-lg mb-2">Risposta in 24h • Consulenza gratuita</p>
-          <p className="text-slate-500 mb-10">Oppure seguimi sui social per aggiornamenti e contenuti sul web development.</p>
-          <div className="flex flex-row gap-8 justify-center mt-8">
-            {[
-              { emoji: "📸", label: "Instagram", href: "https://www.instagram.com/mdweb.design/", target: "_blank" },
-              { emoji: "✉️", label: "Email", href: "mailto:mdsitebuilder@gmail.com", target: "_self" },
-              { emoji: "📅", label: "Prenota", href: "https://calendly.com/mdwebsites/30min", target: "_blank" },
-            ].map((item, i) => (
-              <motion.a
-                key={i}
-                href={item.href}
-                target={item.target}
-                whileHover={{ scale: 1.2, y: -8 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 300 }}
-                className="flex flex-col items-center gap-2 cursor-pointer"
+      {/* CONTATTI – FUTURISTIC CONTROL CENTER */}
+      <section
+        id="contatti"
+        className="relative border-t border-slate-800/80 px-4 py-24"
+      >
+        {/* Background lights and blur */}
+        <div className="pointer-events-none absolute inset-0 -z-20">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.16),transparent_60%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,_rgba(79,70,229,0.2),transparent_60%)]" />
+        </div>
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-t from-black/60 via-slate-950/40 to-transparent blur-2xl" />
+
+        <div className="mx-auto flex max-w-6xl flex-col gap-12 md:gap-16">
+          {/* Headline + description */}
+          <Section className="max-w-3xl">
+            <motion.h2
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.6 }}
+              variants={{
+                hidden: {},
+                visible: {
+                  transition: { staggerChildren: 0.06 },
+                },
+              }}
+              className="text-3xl font-semibold tracking-tight text-slate-50 sm:text-4xl md:text-[2.4rem]"
+            >
+              <motion.span
+                variants={{
+                  hidden: { opacity: 0, y: 24 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: 'easeOut' } },
+                }}
+                className="block text-slate-300"
               >
-                <div className="text-5xl">{item.emoji}</div>
-                <span className="text-slate-400 text-sm font-medium">{item.label}</span>
-              </motion.a>
-            ))}
+                Allineiamo
+              </motion.span>
+              <motion.span
+                variants={{
+                  hidden: { opacity: 0, y: 24 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: 'easeOut', delay: 0.05 } },
+                }}
+                className="block"
+              >
+                i tuoi sistemi con una
+                <motion.span
+                  className="ml-2 inline-block bg-gradient-to-r from-sky-400 via-cyan-300 to-indigo-400 bg-clip-text text-transparent"
+                  animate={{
+                    backgroundPositionX: ['0%', '100%', '0%'],
+                    textShadow: [
+                      '0 0 18px rgba(56,189,248,0.7)',
+                      '0 0 22px rgba(79,70,229,0.9)',
+                      '0 0 18px rgba(56,189,248,0.7)',
+                    ],
+                  }}
+                  transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+                  style={{ backgroundSize: '200% 100%' }}
+                >
+                  crescita guidata dai dati.
+                </motion.span>
+              </motion.span>
+            </motion.h2>
+
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.6 }}
+              transition={{ duration: 0.6, ease: 'easeOut', delay: 0.15 }}
+              className="mt-5 max-w-xl text-sm text-slate-300 md:text-[0.95rem]"
+            >
+              Ogni progetto inizia con una mappa chiara di metriche, funnel e priorità.
+              L’obiettivo non è solo lanciare un sito, ma attivare un sistema che possa
+              crescere, misurare e migliorare nel tempo.
+            </motion.p>
+          </Section>
+
+          {/* CTAs + contact info cards */}
+          <div className="grid gap-10 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1.1fr)] md:items-start">
+            {/* CTA block */}
+            <Section className="relative">
+              <motion.div
+                className="relative overflow-hidden rounded-3xl border border-slate-800/80 bg-slate-950/80 p-6 shadow-[0_24px_90px_rgba(15,23,42,0.95)] backdrop-blur-2xl md:p-8"
+                initial={{ opacity: 0, y: 32 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 0.65, ease: 'easeOut' }}
+              >
+                <div className="pointer-events-none absolute inset-px rounded-[1.6rem] border border-transparent bg-[conic-gradient(from_160deg_at_0%_0%,rgba(56,189,248,0.06),rgba(79,70,229,0.35),rgba(236,72,153,0.18),rgba(56,189,248,0.06))] opacity-80 mix-blend-screen" />
+                <div className="pointer-events-none absolute inset-0 rounded-[1.6rem] bg-[radial-gradient(circle_at_top,_rgba(148,163,184,0.2),transparent_65%)]" />
+
+                <div className="relative flex flex-col gap-6">
+                  <div className="space-y-2">
+                    <p className="text-[0.7rem] font-semibold uppercase tracking-[0.32em] text-slate-400">
+                      Sessione di allineamento
+                    </p>
+                    <p className="text-sm text-slate-300 md:text-[0.95rem]">
+                      In 30 minuti definiamo obiettivi, vincoli tecnici e metriche critiche.
+                      Poi progettiamo il sistema che li faccia lavorare insieme.
+                    </p>
+                  </div>
+
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                    <motion.a
+                      href="mailto:info@cliente.com?subject=Avvia%20un%20progetto%20digitale"
+                      className="inline-flex flex-1 items-center justify-center rounded-full bg-gradient-to-r from-sky-500 via-indigo-500 to-cyan-400 px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_0_32px_rgba(56,189,248,0.9)] transition-[box-shadow,transform] duration-300 hover:shadow-[0_0_52px_rgba(129,140,248,1)]"
+                      whileHover={{ scale: 1.05, y: -2 }}
+                      whileTap={{ scale: 0.97 }}
+                    >
+                      Avvia il progetto
+                    </motion.a>
+
+                    <motion.a
+                      href="#servizi"
+                      className="inline-flex flex-1 items-center justify-center rounded-full border border-cyan-400/70 bg-white/[0.02] px-6 py-3 text-sm font-semibold text-cyan-200 shadow-[0_0_18px_rgba(34,211,238,0.3)] transition-[background,color,border-color,box-shadow,transform] duration-300 hover:border-transparent hover:bg-cyan-300 hover:text-slate-950 hover:shadow-[0_0_40px_rgba(34,211,238,0.7)]"
+                      whileHover={{ scale: 1.03, y: -1 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      Esplora le capacità
+                    </motion.a>
+                  </div>
+
+                  <div className="mt-1 text-[0.75rem] text-slate-500">
+                    Tempi medi di risposta: entro 24h lavorative. Nessun obbligo, solo
+                    analisi concreta del potenziale.
+                  </div>
+                </div>
+              </motion.div>
+            </Section>
+
+            {/* Contact info cards – glassmorphism lab tiles */}
+            <div className="grid gap-4 sm:grid-cols-3 md:gap-5">
+              {[
+                {
+                  title: "Email",
+                  value: "info@cliente.com",
+                  href: "mailto:info@cliente.com",
+                },
+                {
+                  title: "Call strategica",
+                  value: "Agenda disponibile",
+                  href: "https://calendly.com",
+                },
+                {
+                  title: "Base operativa",
+                  value: "Milano, EU",
+                  href: "#",
+                },
+              ].map((card, index) => (
+                <Section key={card.title}>
+                  <motion.a
+                    href={card.href}
+                    target={card.href.startsWith("http") ? "_blank" : undefined}
+                    rel={card.href.startsWith("http") ? "noreferrer" : undefined}
+                    className="group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-950/80 p-4 text-left shadow-[0_20px_70px_rgba(15,23,42,0.9)] backdrop-blur-2xl transition-[transform,box-shadow,border-color] duration-300"
+                    whileHover={{ y: -6 }}
+                  >
+                    <div
+                      className={`pointer-events-none absolute inset-px rounded-[1.4rem] border border-transparent bg-gradient-to-br ${
+                        index === 0
+                          ? "from-sky-500/40 via-cyan-400/30 to-transparent"
+                          : index === 1
+                          ? "from-indigo-500/40 via-sky-500/30 to-transparent"
+                          : "from-emerald-400/35 via-cyan-400/30 to-transparent"
+                      } opacity-70 mix-blend-screen`}
+                    />
+                    <div className="relative space-y-3">
+                      <div className="text-[0.7rem] font-medium uppercase tracking-[0.24em] text-slate-400">
+                        {card.title}
+                      </div>
+                      <div className="text-sm font-semibold text-slate-50">
+                        {card.value}
+                      </div>
+                    </div>
+                  </motion.a>
+                </Section>
+              ))}
+            </div>
           </div>
-        </Section>
+        </div>
       </section>
 
     </main>

@@ -6,11 +6,23 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { siteConfig } from "@/config/site";
 
-const navLinks = siteConfig.nav;
+type NavItem = {
+  label: string;
+  href: string;
+};
+
+const navLinks = siteConfig.nav as NavItem[];
+
+// Standard ease-out cubic-bezier used as array for type safety
+const EASE_OUT: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 const headerVariants = {
   hidden: { y: -32, opacity: 0 },
-  visible: { y: 0, opacity: 1, transition: { duration: 0.6, ease: "easeOut" } },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: { duration: 0.6, ease: EASE_OUT },
+  },
 };
 
 const mobileMenuVariants = {
@@ -19,13 +31,13 @@ const mobileMenuVariants = {
     opacity: 1,
     y: 0,
     height: "auto",
-    transition: { duration: 0.28, ease: "easeInOut" },
+    transition: { duration: 0.28, ease: EASE_OUT },
   },
   exit: {
     opacity: 0,
     y: -6,
     height: 0,
-    transition: { duration: 0.22, ease: "easeInOut" },
+    transition: { duration: 0.22, ease: EASE_OUT },
   },
 };
 
@@ -74,7 +86,7 @@ const Header: React.FC = () => {
         {/* Center navigation */}
         <nav className="hidden flex-1 items-center justify-center md:flex">
           <ul className="flex items-center gap-8 text-xs font-medium uppercase tracking-[0.2em]">
-            {navLinks.map((item) => {
+            {navLinks.map((item: NavItem) => {
               const isActive =
                 item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
               return (
@@ -155,7 +167,7 @@ const Header: React.FC = () => {
               <div className="overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-950/95 shadow-[0_20px_70px_rgba(15,23,42,1)] backdrop-blur-2xl">
                 <nav className="px-4 py-3">
                   <ul className="flex flex-col gap-1 text-sm font-medium text-slate-100">
-                    {navLinks.map((item) => {
+                    {navLinks.map((item: NavItem) => {
                       const isActive =
                         item.href === "/"
                           ? pathname === "/"
@@ -198,103 +210,3 @@ const Header: React.FC = () => {
 };
 
 export default Header;
-"use client";
-
-import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
-import Link from "next/link";
-
-export default function Header() {
-  const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "Servizi", href: "#servizi" },
-    { name: "Chi sono", href: "#chi-siamo" },
-    { name: "Contatti", href: "#contatti" },
-  ];
-
-  return (
-    <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled
-          ? "backdrop-blur-xl bg-slate-950/60 border-b border-sky-500/20 shadow-[0_0_20px_rgba(56,189,248,0.15)]"
-          : "bg-transparent"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-
-        {/* LOGO */}
-        <Link href="/" className="relative group">
-          <span className="text-xl font-bold tracking-widest bg-gradient-to-r from-sky-400 to-indigo-500 bg-clip-text text-transparent">
-            M.D.
-          </span>
-          <span className="ml-2 text-white font-light tracking-wide">
-            Digital Lab
-          </span>
-          <div className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-sky-400 to-indigo-500 transition-all duration-300 group-hover:w-full"></div>
-        </Link>
-
-        {/* NAV DESKTOP */}
-        <nav className="hidden md:flex gap-10 text-sm font-medium">
-          {navLinks.map((link, i) => (
-            <motion.a
-              key={i}
-              href={link.href}
-              whileHover={{ y: -2 }}
-              className="relative text-slate-300 hover:text-white transition-colors"
-            >
-              {link.name}
-              <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-gradient-to-r from-sky-400 to-indigo-500 transition-all duration-300 hover:w-full"></span>
-            </motion.a>
-          ))}
-        </nav>
-
-        {/* CTA DESKTOP */}
-        <motion.a
-          href="#contatti"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="hidden md:inline-flex px-6 py-2 rounded-full bg-gradient-to-r from-sky-500 to-indigo-500 text-slate-950 font-semibold shadow-[0_0_20px_rgba(56,189,248,0.4)] hover:shadow-[0_0_30px_rgba(99,102,241,0.6)] transition-all duration-300"
-        >
-          Inizia ora
-        </motion.a>
-
-        {/* HAMBURGER */}
-        <button
-          onClick={() => setOpen(!open)}
-          className="md:hidden flex flex-col gap-1"
-        >
-          <span className="w-6 h-[2px] bg-white"></span>
-          <span className="w-6 h-[2px] bg-white"></span>
-          <span className="w-6 h-[2px] bg-white"></span>
-        </button>
-      </div>
-
-      {/* MOBILE MENU */}
-      {open && (
-        <div className="md:hidden backdrop-blur-xl bg-slate-950/90 border-t border-sky-500/20 px-6 py-6 flex flex-col gap-6">
-          {navLinks.map((link, i) => (
-            <a
-              key={i}
-              href={link.href}
-              onClick={() => setOpen(false)}
-              className="text-slate-300 text-lg hover:text-sky-400 transition-colors"
-            >
-              {link.name}
-            </a>
-          ))}
-        </div>
-      )}
-    </header>
-  );
-}
