@@ -3,10 +3,14 @@
 import { motion, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" as const }
+  }
+}
 
 function Section({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   const ref = useRef(null);
