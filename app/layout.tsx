@@ -20,7 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="it">
-      <body className={`${geist.variable} antialiased`}>
+      <body
+        className={`${geist.variable} antialiased scroll-smooth bg-[#0a0a0f] text-slate-50 selection:bg-cyan-500/30 selection:text-slate-50 transition-colors duration-300`}
+      >
         <Header />
         {children}
       </body>
